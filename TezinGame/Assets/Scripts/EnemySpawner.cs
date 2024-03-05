@@ -1,9 +1,14 @@
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
-{   
-    private GameManager gameManager;
+{
+    // Public variables
     public float minDistanciaEntreJogadorEInimigo = 5f;  //Distância mínima entre jogador e inimigo.
+
+    // Private variables
+    private GameManager gameManager;
+    private int timer;
+    private int howManyEnemiesToSpawn = 2;
 
     void Awake()
     {
@@ -17,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         InstanciarInimigos(1);
+        InvokeRepeating("RoundSystem", 1.0f, 1.0f);
     }
     void InstanciarInimigos(int quantidadeInimigos)
     {   
@@ -39,6 +45,19 @@ public class EnemySpawner : MonoBehaviour
 
                 Debug.Log("Nasci");
             }
+        }
+    }
+
+    private void RoundSystem()
+    {
+        timer ++;
+
+        if(timer >= 5)
+        {
+            InstanciarInimigos(howManyEnemiesToSpawn);
+            
+            howManyEnemiesToSpawn ++;
+            timer = 0;
         }
     }
 }
