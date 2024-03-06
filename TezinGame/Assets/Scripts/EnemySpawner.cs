@@ -1,14 +1,19 @@
+using System.Collections.Generic;
+using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     // Public variables
-    public float minDistanciaEntreJogadorEInimigo = 5f;  //Distância mínima entre jogador e inimigo.
+    public List <Transform> enemySpawnPoints = new List<Transform>();
 
     // Private variables
     private GameManager gameManager;
     private int timer;
     private int howManyEnemiesToSpawn = 2;
+    private int enemyListNumber;
+    private Vector3 enemyPos;
 
     void Awake()
     {
@@ -26,26 +31,15 @@ public class EnemySpawner : MonoBehaviour
     }
     void InstanciarInimigos(int quantidadeInimigos)
     {   
-        if (gameManager.isPlayerAlive())
-        {
-            for (int i = 0; i < quantidadeInimigos; i++)
-            {
-                Vector3 posicaoJogador = gameManager.playerTransform.position;
+        for(int i = 0; i < quantidadeInimigos; i++)
+        {   
 
-                float posX, posY;
-                do
-                {
-                    posX = Random.Range(-GameManager.width / 2f, GameManager.width / 2f);
-                    posY = Random.Range(-GameManager.height / 2f, GameManager.height / 2f);
+            enemyListNumber = Random.Range(0, enemySpawnPoints.Count - 1);
+            enemyPos = enemySpawnPoints[enemyListNumber].position;
 
-                } while (Vector3.Distance(posicaoJogador, new Vector3(posX, posY, 0f)) < minDistanciaEntreJogadorEInimigo);
-
-                //Instancia o objeto inimigo na posição calculada
-                GameObject inimigo = Instantiate(gameManager.enemy, new Vector3(posX, posY, 0f), Quaternion.identity);
-
-                Debug.Log("Nasci");
-            }
+            GameObject enemy = Instantiate(gameManager.enemy, enemyPos, Quaternion.identity);
         }
+
     }
 
     private void RoundSystem()

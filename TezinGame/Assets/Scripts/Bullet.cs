@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
   }
   private void Update()
   {
-    if(contador >= 1)
+    if(contador >= 2)
     {
       Destroy(gameObject);
       contador = 0;
@@ -30,10 +30,8 @@ public class Bullet : MonoBehaviour
 
     if(other.gameObject.tag == "Enemy")
     {
-      enemyScript.DecreaseEnemyHP(1);
+      Destroy(gameObject);
     }
-
-    Destroy(gameObject);
   }
 
   private void Contador()

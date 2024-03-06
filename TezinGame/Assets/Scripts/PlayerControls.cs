@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {   
+    public Light lanterna;
+
+    private bool Cooldown;
     private Rigidbody2D rb;
     private Weapon Weapon;
     private GameManager gameManager;
@@ -21,6 +26,8 @@ public class PlayerControls : MonoBehaviour
     {
         CapturarBotaoDoMouse();
         CatchAxis();
+
+        lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -3);
     }
     
     private void FixedUpdate()
@@ -30,12 +37,21 @@ public class PlayerControls : MonoBehaviour
  
     private void CapturarBotaoDoMouse()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !Cooldown)
         {
             Weapon.Fire();
+            StartCoroutine(fireCooldown());
         }
     }
 
+    private IEnumerator fireCooldown()
+    {
+        Cooldown = true;
+
+        yield return new WaitForSeconds(0.1f);
+
+        Cooldown = false;
+    }
     
     private void CatchAxis()
     {

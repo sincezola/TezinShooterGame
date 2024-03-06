@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBrain : MonoBehaviour
 {   
     private GameManager gameManager;
-    public int enemyHp = 5;
+    private int enemyHp = 5;
 
     [Header("Health Bar Settings")]
     public Transform healthBar; // Barra verde
@@ -39,10 +39,14 @@ public class EnemyBrain : MonoBehaviour
       }
     }
 
-    public void DecreaseEnemyHP(int Damage)
-    {
-      enemyHp -= Damage;
-      healthBarScale.x = healtPercent * enemyHp;
-      healthBar.localScale = healthBarScale;
+    private void OnTriggerEnter2D(Collider2D other)
+    { 
+      if(other.gameObject.tag == "Bullet")
+      {
+        enemyHp -= 1;
+        healthBarScale.x = healtPercent * enemyHp;
+        healthBar.localScale = healthBarScale;
+      }
+
     }
 }

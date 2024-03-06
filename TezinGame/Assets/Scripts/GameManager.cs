@@ -16,8 +16,8 @@ public class GameManager : MonoBehaviour
     public int playerHp = 3;
     
     [Header("Screen Size")]
-    public static int width = 17;
-    public static int height = 10;
+    public static int width = 72;
+    public static int height = 107;
 
     public bool isPlayerAlive()
     {
@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
         }
 
         else
-        {
+        {   
+            Application.Quit();
             return false;
         }
     }
