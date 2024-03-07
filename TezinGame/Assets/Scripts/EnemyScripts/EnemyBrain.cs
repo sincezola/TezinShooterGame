@@ -9,8 +9,6 @@ public class EnemyBrain : MonoBehaviour
 
     [Header("Health Bar Settings")]
     public Transform healthBar; // Barra verde
-    public GameObject healthBarObject; // Objeto pai das barras
-
     private Vector3 healthBarScale; // Tamanho da barra
     private float healtPercent; // Percentual de vida para calculo
 

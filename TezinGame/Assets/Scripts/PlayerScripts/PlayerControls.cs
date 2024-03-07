@@ -13,6 +13,11 @@ public class PlayerControls : MonoBehaviour
     private Weapon Weapon;
     private GameManager gameManager;
 
+    [Header("Health Bar Settings")]
+    public Transform healthBar; // Barra de Vida
+    private Vector3 healthBarScale; // Tamanho da barra
+    private float healtPercent; // Percentual de vida para calculo
+
     Vector2 moveDirection;
 
     private void Awake()
@@ -27,7 +32,7 @@ public class PlayerControls : MonoBehaviour
         CapturarBotaoDoMouse();
         CatchAxis();
 
-        lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -3);
+        lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -1.39f);
     }
     
     private void FixedUpdate()
@@ -40,15 +45,15 @@ public class PlayerControls : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && !Cooldown)
         {
             Weapon.Fire();
-            StartCoroutine(fireCooldown());
+            StartCoroutine(fireCooldown(0.1f));
         }
     }
 
-    private IEnumerator fireCooldown()
+    private IEnumerator fireCooldown(float HowMuchCooldown)
     {
         Cooldown = true;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(HowMuchCooldown);
 
         Cooldown = false;
     }
