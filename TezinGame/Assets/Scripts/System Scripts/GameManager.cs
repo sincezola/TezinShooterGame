@@ -19,17 +19,7 @@ public class GameManager : MonoBehaviour
     public static int height = 107;
 
     [Header("Health Bar Settings")]
-    public Transform healthBar; // Barra de Vida
-    public GameObject healthBarGameObject; // GameObject da Barra de Vida
-    private Vector3 healthBarScale; // Tamanho da barra
-    private float healtPercent; // Percentual de vida para cálculo
-
-    private void Start()
-    {
-        // Inicialize a variável healthBarScale corretamente
-        healthBarScale = healthBar.localScale;
-        healtPercent = healthBarScale.x / playerHp;
-    }
+    public List <GameObject> HealthBarPieces = new List<GameObject>();
 
     public bool isPlayerAlive()
     {
@@ -52,16 +42,14 @@ public class GameManager : MonoBehaviour
         if (playerHp <= 0)
         {
             Destroy(playerGameObject);
-            Destroy(healthBarGameObject);
+            Destroy(HealthBarPieces[0]);
 
             enabled = false;
         }
 
         else
         {
-            // Atualize a escala da barra de vida
-            healthBarScale.x = healtPercent * playerHp;
-            healthBar.localScale = healthBarScale;
+            HealthBarPieces[playerHp].SetActive(false);
         }
     }
 }

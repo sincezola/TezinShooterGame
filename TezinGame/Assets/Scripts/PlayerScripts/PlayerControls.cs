@@ -8,15 +8,11 @@ public class PlayerControls : MonoBehaviour
 {   
     public Light lanterna;
 
+    // Private Variables
     private bool Cooldown;
     private Rigidbody2D rb;
     private Weapon Weapon;
     private GameManager gameManager;
-
-    [Header("Health Bar Settings")]
-    public Transform healthBar; // Barra de Vida
-    private Vector3 healthBarScale; // Tamanho da barra
-    private float healtPercent; // Percentual de vida para calculo
 
     Vector2 moveDirection;
 
@@ -70,7 +66,7 @@ public class PlayerControls : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            gameManager.DecreasePlayerHP(2);
+            gameManager.DecreasePlayerHP(1);
         }
     }
 }
