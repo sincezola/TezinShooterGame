@@ -31,6 +31,11 @@ public class EnemySpawner : MonoBehaviour
     }
     void InstanciarInimigos(int quantidadeInimigos)
     {   
+        if(!gameManager.isPlayerAlive())
+        {
+            enabled = false;
+        }
+
         for(int i = 0; i < quantidadeInimigos; i++)
         {   
 
@@ -43,7 +48,12 @@ public class EnemySpawner : MonoBehaviour
     }
 
     private void RoundSystem()
-    {
+    {   
+        if(!gameManager.isPlayerAlive())
+        {
+            enabled = false;
+        }
+
         timer ++;
 
         if(timer >= 5)

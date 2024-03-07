@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Application.Quit();
+            
             return false;
         }
     }

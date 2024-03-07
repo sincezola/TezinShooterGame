@@ -7,9 +7,11 @@ using UnityEngine;
 public class PlayerControls : MonoBehaviour
 {   
     public Light lanterna;
+    public GameObject lanternaObject;
 
     // Private Variables
     private bool Cooldown;
+    private bool isFlashLightOn = true;
     private Rigidbody2D rb;
     private Weapon Weapon;
     private GameManager gameManager;
@@ -27,6 +29,12 @@ public class PlayerControls : MonoBehaviour
     {
         CapturarBotaoDoMouse();
         CatchAxis();
+        CapturarF();
+
+        if(!gameManager.isPlayerAlive())
+        {
+            Destroy(lanterna);
+        }
 
         lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -1.39f);
     }
@@ -60,6 +68,29 @@ public class PlayerControls : MonoBehaviour
         float moveY = Input.GetAxis("Vertical");
 
         moveDirection = new Vector2(moveX, moveY).normalized;
+    }
+
+    private void CapturarF()
+    {
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            ChangeFlashLightState();
+        }
+    }
+
+    private void ChangeFlashLightState()
+    {
+        if(!isFlashLightOn)
+        {
+            isFlashLightOn = true;
+        }
+
+        else
+        {
+            isFlashLightOn = false;
+        }
+
+        lanternaObject.SetActive(isFlashLightOn);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
