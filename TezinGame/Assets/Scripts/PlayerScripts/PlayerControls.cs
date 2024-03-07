@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour
 
     // Private Variables
     private bool Cooldown;
+    private float timer;
     private bool isFlashLightOn = true;
     private Rigidbody2D rb;
     private Weapon Weapon;
@@ -37,6 +38,8 @@ public class PlayerControls : MonoBehaviour
         }
 
         lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -1.39f);
+
+        timer += Time.deltaTime;
     }
     
     private void FixedUpdate()
@@ -91,6 +94,28 @@ public class PlayerControls : MonoBehaviour
         }
 
         lanternaObject.SetActive(isFlashLightOn);
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= 2.0f)
+            {
+                gameManager.DecreasePlayerHP(1);
+                timer = 0;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            timer = 0;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
