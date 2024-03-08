@@ -31,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        InstanciarInimigos(1);
+        InstanciarInimigos(0);
 
         brain = FindObjectOfType<EnemyBrain>();
     }
@@ -70,5 +70,6 @@ public class EnemySpawner : MonoBehaviour
             Debug.Log("Inimigo Spawnado");
         }
 
+        enabled = false;
     }
 }

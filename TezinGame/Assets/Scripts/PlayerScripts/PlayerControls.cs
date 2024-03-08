@@ -99,7 +99,9 @@ public class PlayerControls : MonoBehaviour
     private void OnCollisionStay2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
-        {
+        {   
+            timer = 0;
+            
             timer += Time.deltaTime;
 
             if (timer >= 2.0f)
@@ -121,7 +123,8 @@ public class PlayerControls : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if(other.gameObject.tag == "Enemy")
-        {
+        {   
+            Debug.Log("Colidi");
             gameManager.DecreasePlayerHP(1);
         }
     }
