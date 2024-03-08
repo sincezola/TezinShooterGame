@@ -3353,6 +3353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecfae811127c9354ab75ad4d694e0881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Round: 1
   enemySpawnPoints:
   - {fileID: 1460827104}
   - {fileID: 1416066468}
@@ -3538,6 +3539,7 @@ MonoBehaviour:
   - {fileID: 1583654822}
   - {fileID: 1903338692}
   - {fileID: 456077450}
+  enemysSpawned: 0
 --- !u!4 &233628500
 Transform:
   m_ObjectHideFlags: 0
@@ -13908,7 +13910,7 @@ GameObject:
   - component: {fileID: 449293574}
   - component: {fileID: 449293573}
   m_Layer: 0
-  m_Name: Square (2)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14224,7 +14226,7 @@ GameObject:
   - component: {fileID: 464281836}
   - component: {fileID: 464281835}
   m_Layer: 0
-  m_Name: Square (8)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26048,7 +26050,7 @@ GameObject:
   - component: {fileID: 957843419}
   - component: {fileID: 957843418}
   m_Layer: 0
-  m_Name: Square (3)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26376,7 +26378,7 @@ Transform:
   m_GameObject: {fileID: 989834832}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -0.13, y: 0.54, z: 0}
+  m_LocalPosition: {x: 1.16, y: 0.54, z: 0}
   m_LocalScale: {x: 0.6666667, y: 0.6666667, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -26395,7 +26397,7 @@ GameObject:
   - component: {fileID: 1014836799}
   - component: {fileID: 1014836798}
   m_Layer: 0
-  m_Name: Square (5)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28673,7 +28675,7 @@ GameObject:
   - component: {fileID: 1143913077}
   - component: {fileID: 1143913076}
   m_Layer: 0
-  m_Name: Square (4)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30796,7 +30798,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 294118185
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 349ebcfe1d305e442b9a0182c68f3c09, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -33349,7 +33351,7 @@ GameObject:
   - component: {fileID: 1406305019}
   - component: {fileID: 1406305018}
   m_Layer: 0
-  m_Name: Square (9)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37656,7 +37658,7 @@ GameObject:
   - component: {fileID: 1632589787}
   - component: {fileID: 1632589786}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38322,7 +38324,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 989834833}
-  bulletPrefab: {fileID: 7390044356148510484, guid: a2a4c556de20de84983091a8ca943094, type: 3}
+  bulletPrefab: {fileID: 3482407526093724630, guid: 51b21ac187f4ba7459ec4bdecb663ca7, type: 3}
   fireForce: 35
 --- !u!212 &1717676518
 SpriteRenderer:
@@ -41243,7 +41245,7 @@ GameObject:
   - component: {fileID: 1906652928}
   - component: {fileID: 1906652927}
   m_Layer: 0
-  m_Name: Square (7)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42543,7 +42545,7 @@ GameObject:
   - component: {fileID: 2006708548}
   - component: {fileID: 2006708547}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43649,7 +43651,7 @@ GameObject:
   - component: {fileID: 2067977809}
   - component: {fileID: 2067977808}
   m_Layer: 0
-  m_Name: Square (6)
+  m_Name: Barriers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

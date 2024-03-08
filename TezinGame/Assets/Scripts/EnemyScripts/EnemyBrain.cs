@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyBrain : MonoBehaviour
 {   
     private GameManager gameManager;
+    private EnemySpawner spawner;
     private int enemyHp = 5;
 
     [Header("Health Bar Settings")]
@@ -15,6 +16,7 @@ public class EnemyBrain : MonoBehaviour
     private void Awake()
     {
       gameManager = FindObjectOfType<GameManager>();
+      spawner = FindObjectOfType<EnemySpawner>();
     }
 
     private void Start()
@@ -34,6 +36,8 @@ public class EnemyBrain : MonoBehaviour
       if (enemyHp <= 0)
       {
         Destroy(gameObject);
+
+        spawner.EnemyDied();
       }
     }
 

@@ -4,21 +4,26 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
-{
+{   
+    [Header("Round")]
+    public int Round = 1;
+
     // Public variables
     public List <Transform> enemySpawnPoints = new List<Transform>();
+    public int enemysSpawned;
 
     // Private variables
     private GameManager gameManager;
-    private int timer;
-    private int howManyEnemiesToSpawn = 2;
+    private int enemiesDead;
+    private EnemyBrain brain;
     private int enemyListNumber;
     private Vector3 enemyPos;
 
     void Awake()
-    {
+    {  
         gameManager = FindObjectOfType<GameManager>();
-        if (gameManager == null)
+
+        if(gameManager == null)
         {
             Debug.LogError("GameManager não encontrado.");
         }
@@ -27,9 +32,25 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         InstanciarInimigos(1);
-        InvokeRepeating("RoundSystem", 1.0f, 1.0f);
+
+        brain = FindObjectOfType<EnemyBrain>();
     }
-    void InstanciarInimigos(int quantidadeInimigos)
+
+    public void EnemyDied()
+    {   
+        enemiesDead++;
+
+        if(enemiesDead == enemysSpawned)
+        {
+            Round++;
+
+            InstanciarInimigos(Round);
+        }
+        
+        Debug.Log(enemiesDead + " Inimigos mortos");
+    }
+
+    public void InstanciarInimigos(int quantidadeInimigos)
     {   
         if(!gameManager.isPlayerAlive())
         {
@@ -43,25 +64,11 @@ public class EnemySpawner : MonoBehaviour
             enemyPos = enemySpawnPoints[enemyListNumber].position;
 
             GameObject enemy = Instantiate(gameManager.enemy, enemyPos, Quaternion.identity);
+
+            enemysSpawned++;
+
+            Debug.Log("Inimigo Spawnado");
         }
 
-    }
-
-    private void RoundSystem()
-    {   
-        if(!gameManager.isPlayerAlive())
-        {
-            enabled = false;
-        }
-
-        timer ++;
-
-        if(timer >= 5)
-        {
-            InstanciarInimigos(howManyEnemiesToSpawn);
-            
-            howManyEnemiesToSpawn ++;
-            timer = 0;
-        }
     }
 }
