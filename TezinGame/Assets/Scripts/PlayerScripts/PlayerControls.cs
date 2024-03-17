@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 {   
     public Light lanterna;
     public GameObject lanternaObject;
-
+    
     // Private Variables
     private bool Cooldown;
     private float timer;
