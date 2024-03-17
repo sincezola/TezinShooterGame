@@ -38,8 +38,6 @@ public class PlayerControls : MonoBehaviour
         }
 
         lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -1.39f);
-
-        timer += Time.deltaTime;
     }
     
     private void FixedUpdate()
@@ -97,14 +95,12 @@ public class PlayerControls : MonoBehaviour
     }
 
     private void OnCollisionStay2D(Collision2D other)
-    {
+    {   
         if (other.gameObject.CompareTag("Enemy"))
-        {   
-            timer = 0;
-            
+        {    
             timer += Time.deltaTime;
 
-            if (timer >= 2.0f)
+            if (timer >= 1.0f)
             {
                 gameManager.DecreasePlayerHP(1);
                 timer = 0;

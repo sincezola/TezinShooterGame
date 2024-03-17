@@ -1,7 +1,6 @@
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Runtime.CompilerServices;
 using UnityEngine;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {   
@@ -9,11 +8,12 @@ public class EnemySpawner : MonoBehaviour
     public int Round = 1;
 
     // Public variables
-    public List <Transform> enemySpawnPoints = new List<Transform>();
+    public List<Transform> enemySpawnPoints = new List<Transform>();
     public int enemysSpawned;
 
     // Private variables
     private GameManager gameManager;
+    private Animator anim;
     private int enemiesDead;
     private EnemyBrain brain;
     private int enemyListNumber;
@@ -31,9 +31,10 @@ public class EnemySpawner : MonoBehaviour
 
     void Start()
     {
-        InstanciarInimigos(0);
-
+        InstanciarInimigos(1);
+        //RoundAnim(); // Chamada original, pode ser removida se preferir usar AnimateTextRound()
         brain = FindObjectOfType<EnemyBrain>();
+        anim = GetComponent<Animator>();
     }
 
     public void EnemyDied()
@@ -43,7 +44,7 @@ public class EnemySpawner : MonoBehaviour
         if(enemiesDead == enemysSpawned)
         {
             Round++;
-
+            //RoundAnim(); // Chamada original, pode ser removida se preferir usar AnimateTextRound()
             InstanciarInimigos(Round);
         }
         
@@ -51,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void InstanciarInimigos(int quantidadeInimigos)
-    {   
+    {
         if(!gameManager.isPlayerAlive())
         {
             enabled = false;
@@ -69,7 +70,20 @@ public class EnemySpawner : MonoBehaviour
 
             Debug.Log("Inimigo Spawnado");
         }
+    }
 
-        enabled = false;
+    // RoundTXT
+    public void AnimateTextRound()
+    {
+        anim.SetTrigger("RoundAnimation");
+
+        Debug.Log("Trigou a Animação");
+    }
+
+    private void RoundAnim()
+    {
+        anim.SetTrigger("RoundAnimation");
+
+        Debug.Log("Trigou a Animação");
     }
 }
