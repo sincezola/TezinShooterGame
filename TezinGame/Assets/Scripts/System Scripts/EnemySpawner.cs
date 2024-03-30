@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Unity.VisualScripting;
 
 public class EnemySpawner : MonoBehaviour
 {   
@@ -13,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     // Private variables
     private GameManager gameManager;
+    private RoundTXTAnim txtAnim;
     private Animator anim;
     private int enemiesDead;
     private EnemyBrain brain;
@@ -22,6 +24,7 @@ public class EnemySpawner : MonoBehaviour
     void Awake()
     {  
         gameManager = FindObjectOfType<GameManager>();
+        txtAnim = FindObjectOfType<RoundTXTAnim>();
 
         if(gameManager == null)
         {
@@ -32,7 +35,7 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         InstanciarInimigos(1);
-        //RoundAnim(); // Chamada original, pode ser removida se preferir usar AnimateTextRound()
+        txtAnim.AnimateRoundTXT();
         brain = FindObjectOfType<EnemyBrain>();
         anim = GetComponent<Animator>();
     }
@@ -70,20 +73,5 @@ public class EnemySpawner : MonoBehaviour
 
             Debug.Log("Inimigo Spawnado");
         }
-    }
-
-    // RoundTXT
-    public void AnimateTextRound()
-    {
-        anim.SetTrigger("RoundAnimation");
-
-        Debug.Log("Trigou a Animação");
-    }
-
-    private void RoundAnim()
-    {
-        anim.SetTrigger("RoundAnimation");
-
-        Debug.Log("Trigou a Animação");
     }
 }
