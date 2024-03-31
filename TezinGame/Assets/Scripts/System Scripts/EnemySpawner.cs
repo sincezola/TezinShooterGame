@@ -15,9 +15,7 @@ public class EnemySpawner : MonoBehaviour
     // Private variables
     private GameManager gameManager;
     private RoundTXTAnim txtAnim;
-    private Animator anim;
     private int enemiesDead;
-    private EnemyBrain brain;
     private int enemyListNumber;
     private Vector3 enemyPos;
 
@@ -33,11 +31,11 @@ public class EnemySpawner : MonoBehaviour
     }
 
     void Start()
-    {
-        InstanciarInimigos(1);
-        txtAnim.AnimateRoundTXT();
-        brain = FindObjectOfType<EnemyBrain>();
-        anim = GetComponent<Animator>();
+    {   
+        StartCoroutine(txtAnim.FirstEnemySpawn());
+
+        txtAnim.AnimateRoundTXT(1);
+
     }
 
     public void EnemyDied()
@@ -47,8 +45,7 @@ public class EnemySpawner : MonoBehaviour
         if(enemiesDead == enemysSpawned)
         {
             Round++;
-            //RoundAnim(); // Chamada original, pode ser removida se preferir usar AnimateTextRound()
-            InstanciarInimigos(Round);
+            txtAnim.StartCoroutine("changeRoundTXT");
         }
         
         Debug.Log(enemiesDead + " Inimigos mortos");
