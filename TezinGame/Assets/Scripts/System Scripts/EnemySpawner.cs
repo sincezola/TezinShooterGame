@@ -14,6 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     // Private variables
     private GameManager gameManager;
+    private Droper droper;
     private RoundTXTAnim txtAnim;
     private int enemiesDead;
     private int enemyListNumber;
@@ -22,6 +23,7 @@ public class EnemySpawner : MonoBehaviour
     void Awake()
     {  
         gameManager = FindObjectOfType<GameManager>();
+        droper = FindObjectOfType<Droper>();
         txtAnim = FindObjectOfType<RoundTXTAnim>();
 
         if(gameManager == null)
@@ -44,7 +46,9 @@ public class EnemySpawner : MonoBehaviour
 
         if(enemiesDead == enemysSpawned)
         {
-            Round++;
+            Round++;    
+            droper.TryToDropSmth();
+
             txtAnim.StartCoroutine("changeRoundTXT");
         }
         

@@ -27,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             return true;
         }
+        
         else
         {
             Application.Quit();
