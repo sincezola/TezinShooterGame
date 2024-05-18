@@ -7,6 +7,7 @@ public class EnemySpawner : MonoBehaviour
 {   
     [Header("Round")]
     public int Round = 1;
+    private int roundToDrop;
 
     // Public variables
     public List<Transform> enemySpawnPoints = new List<Transform>();
@@ -46,8 +47,15 @@ public class EnemySpawner : MonoBehaviour
 
         if(enemiesDead == enemysSpawned)
         {
-            Round++;    
-            droper.TryToDropSmth();
+            Round++;
+            roundToDrop++;
+            droper.DropSmth();
+
+            if(roundToDrop % 2 == 0)
+            {
+                droper.DropSmth();
+                roundToDrop = 0;
+            }
 
             txtAnim.StartCoroutine("changeRoundTXT");
         }

@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     public GameObject playerGameObject;
     public GameObject enemy;
 
+    [Header("Objetos do Jogo")]
+    public Sprite M4Weapon;
+    public Sprite PistolWeapon;
+
     [Header("Características dos Jogadores")]
     public float enemySpeed = 4f;
     public float playerSpeed = 5f;
@@ -38,7 +42,6 @@ public class GameManager : MonoBehaviour
 
     public void DecreasePlayerHP(int Damage)
     {   
-
         playerHp -= Damage;
         
         if (playerHp <= 0)

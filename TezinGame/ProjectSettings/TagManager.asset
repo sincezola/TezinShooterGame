@@ -7,11 +7,12 @@ TagManager:
   - Enemy
   - Bullet
   - Obstacle
+  - DroppedM4
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Dropped
   - Water
   - UI
   - 

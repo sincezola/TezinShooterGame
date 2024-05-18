@@ -11,6 +11,7 @@ public class PlayerControls : MonoBehaviour
     
     // Private Variables
     private bool Cooldown;
+    private Droper droper;
     private float timer;
     private bool isFlashLightOn = true;
     private Rigidbody2D rb;
@@ -22,6 +23,7 @@ public class PlayerControls : MonoBehaviour
     private void Awake()
     {
         Weapon = FindObjectOfType<Weapon>();
+        droper = FindObjectOfType<Droper>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = FindObjectOfType<GameManager>();
     }
@@ -30,7 +32,7 @@ public class PlayerControls : MonoBehaviour
     {
         CapturarBotaoDoMouse();
         CatchAxis();
-        CapturarF();
+        CapturarTeclas();
 
         if(!gameManager.isPlayerAlive())
         {
@@ -71,9 +73,9 @@ public class PlayerControls : MonoBehaviour
         moveDirection = new Vector2(moveX, moveY).normalized;
     }
 
-    private void CapturarF()
+    private void CapturarTeclas()
     {
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             ChangeFlashLightState();
         }
@@ -122,6 +124,27 @@ public class PlayerControls : MonoBehaviour
         {   
             Debug.Log("Colidi");
             gameManager.DecreasePlayerHP(1);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other) // Objetos Dropados
+    {
+        if(Input.GetKeyDown(KeyCode.F)) // Interagindo com o Item dropado
+        {
+            switch (other.gameObject.tag)
+            {
+                case "DroppedM4": // Quer pegar uma M4 Dropada
+
+                    Debug.Log("PegouM4");
+
+                    Weapon.SwitchWeapon(gameManager.M4Weapon);
+                    break;
+
+                default:
+                    break;
+            }
+
+            Destroy(other.gameObject);
         }
     }
 }
