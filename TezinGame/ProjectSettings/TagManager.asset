@@ -8,6 +8,7 @@ TagManager:
   - Bullet
   - Obstacle
   - DroppedM4
+  - FirePoint
   layers:
   - Default
   - TransparentFX

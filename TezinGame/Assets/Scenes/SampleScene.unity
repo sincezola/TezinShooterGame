@@ -19133,7 +19133,7 @@ Transform:
   m_GameObject: {fileID: 365108064}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.8244915, y: 9.758152, z: -1.39}
+  m_LocalPosition: {x: 32, y: 16.4, z: -1.39}
   m_LocalScale: {x: 1, y: 1, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28451,8 +28451,8 @@ Tilemap:
   - first: {x: 3, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -28471,8 +28471,8 @@ Tilemap:
   - first: {x: 4, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -28491,8 +28491,8 @@ Tilemap:
   - first: {x: 5, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -28511,8 +28511,8 @@ Tilemap:
   - first: {x: 6, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -28531,8 +28531,8 @@ Tilemap:
   - first: {x: 7, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -28551,8 +28551,8 @@ Tilemap:
   - first: {x: 8, y: -15, z: -1}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -29141,8 +29141,8 @@ Tilemap:
   - first: {x: 2, y: -14, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 42
-      m_TileSpriteIndex: 42
+      m_TileIndex: 104
+      m_TileSpriteIndex: 104
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -41994,7 +41994,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 742b20853ab7cf448b42ac203030b459, type: 2}
   - m_RefCount: 12
     m_Data: {fileID: 11400000, guid: be5a6f4e8c12b7f48b438aca5a975560, type: 2}
-  - m_RefCount: 765
+  - m_RefCount: 758
     m_Data: {fileID: 11400000, guid: d1bdcf0b78cdb0c4ebad51d20d39893c, type: 2}
   - m_RefCount: 2
     m_Data: {fileID: 11400000, guid: ce5a5978c4c4367418b45b94c330c1d7, type: 2}
@@ -42118,7 +42118,7 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: b2e385226e70c8f4e92901ac389a1bf9, type: 2}
   - m_RefCount: 3
     m_Data: {fileID: 11400000, guid: d7b0379753b06674885b5117887615b8, type: 2}
-  - m_RefCount: 105
+  - m_RefCount: 112
     m_Data: {fileID: 11400000, guid: 5ab369588786cc14693362e7e60d0617, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: c9b07ac3aa5ffc6479522cd68eb73f3d, type: 2}
@@ -42491,7 +42491,7 @@ Tilemap:
     m_Data: {fileID: 21300212, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
   - m_RefCount: 12
     m_Data: {fileID: 21300210, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
-  - m_RefCount: 765
+  - m_RefCount: 758
     m_Data: {fileID: 21300156, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: 21300218, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
@@ -42615,7 +42615,7 @@ Tilemap:
     m_Data: {fileID: 21300486, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
   - m_RefCount: 3
     m_Data: {fileID: 21300488, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
-  - m_RefCount: 105
+  - m_RefCount: 112
     m_Data: {fileID: 21300444, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300458, guid: 95d22684aba5646d79a26b3287a692b6, type: 3}
@@ -77880,7 +77880,7 @@ GameObject:
   - component: {fileID: 989834833}
   m_Layer: 0
   m_Name: FirePoint
-  m_TagString: Untagged
+  m_TagString: FirePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -115342,6 +115342,50 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1673809197
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1673809198}
+  - component: {fileID: 1673809199}
+  m_Layer: 0
+  m_Name: WeaponsStats
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1673809198
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673809197}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1940101622}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1673809199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1673809197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f27b17c99225e5246b00d3dc0b2d5ac6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1675348788
 GameObject:
   m_ObjectHideFlags: 0
@@ -131196,6 +131240,7 @@ Transform:
   - {fileID: 1534790254}
   - {fileID: 1076495306}
   - {fileID: 1032884128}
+  - {fileID: 1673809198}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1952010131

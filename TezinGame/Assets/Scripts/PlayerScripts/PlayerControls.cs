@@ -137,7 +137,7 @@ public class PlayerControls : MonoBehaviour
 
                     Debug.Log("PegouM4");
 
-                    Weapon.SwitchWeapon(gameManager.M4Weapon);
+                    Weapon.SwitchWeapon("M4");
                     break;
 
                 default:
