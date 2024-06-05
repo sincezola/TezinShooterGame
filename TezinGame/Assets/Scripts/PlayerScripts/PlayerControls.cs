@@ -123,7 +123,7 @@ public class PlayerControls : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {   
             Debug.Log("Colidi");
-            gameManager.DecreasePlayerHP(1);
+            gameManager.DecreasePlayerHP(Weapon.CurrentWeaponForce());
         }
     }
 

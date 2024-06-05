@@ -14,6 +14,7 @@ public class Weapon : MonoBehaviour
     private SpriteRenderer spriteRender;
     private GameObject firepoint;
     private Coroutine fireCoroutine;
+    private string currentWeapon = "Pistol";
 
     [Header("Força do Tiro")]
     public float fireForce = 20f;
@@ -86,17 +87,35 @@ public class Weapon : MonoBehaviour
                 spriteRender.sprite = _gameManager.M4Weapon;
 
                 canSpamShoots = true;
+                currentWeapon = "M4";
             }
             else if (Weapon == "Pistol")
             {
                 spriteRender.sprite = _gameManager.PistolWeapon;
 
                 canSpamShoots = false;
+                currentWeapon = "Pistol";
             }
-        }
-        else
+        } else
         {
             Debug.LogError("Weapon not found: " + Weapon);
         }
+
     }
+
+    public int CurrentWeaponForce()
+    {
+        if (currentWeapon == "M4")
+        {
+            return 2;
+        } else if (currentWeapon == "Pistol"){
+            return 1;
+        }
+
+        else
+        {   
+            Debug.Log("Arma desconhecida, alterando dano para 1");
+            return 1;
+        }
+    }   
 }
