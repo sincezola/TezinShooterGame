@@ -1,2 +1,2 @@
 # TezinShooterGame
- A game created for my friend Tezin.
+ A game developed for my friend Tezin.
