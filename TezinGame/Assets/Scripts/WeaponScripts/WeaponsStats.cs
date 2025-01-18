@@ -5,12 +5,13 @@ using UnityEngine;
 public class WeaponsStats : MonoBehaviour
 {   
     public Dictionary<string, Dictionary<string, Vector3>> allStats;
+    public Dictionary<string, Dictionary<string, int>> bulletStats;
 
     #region Weapons Dictionary's
-    public Dictionary<string, Vector3> M4Stats = new Dictionary<string, Vector3>();
-    public Dictionary<string, int> M4Bullets = new Dictionary<string, int>();
-    public Dictionary<string, Vector3> PistolStats = new Dictionary<string, Vector3>();
-    public Dictionary<string, int> PistolBullets = new Dictionary<string, int>();
+    private Dictionary<string, Vector3> M4Stats = new Dictionary<string, Vector3>();
+    private Dictionary<string, int> M4Bullets = new Dictionary<string, int>();
+    private Dictionary<string, Vector3> PistolStats = new Dictionary<string, Vector3>();
+    private Dictionary<string, int> PistolBullets = new Dictionary<string, int>();
 
     #endregion
     //####################################################################################//
@@ -40,6 +41,12 @@ public class WeaponsStats : MonoBehaviour
         {
             { "M4", M4Stats },
             { "Pistol", PistolStats }
+        };
+
+        bulletStats = new Dictionary<string, Dictionary<string, int>>
+        {
+            { "M4", M4Bullets },
+            { "Pistol", PistolBullets }
         };
 
         InitializeStats();

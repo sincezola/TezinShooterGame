@@ -10,22 +10,22 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public bool canSpamShoots = false;
 
-    [Header("Bullet")]
-    public TextMeshProUGUI bulletMark;
-
     private GameManager _gameManager;
     private WeaponsStats stats;
     private SpriteRenderer spriteRender;
     private GameObject firepoint;
     private Coroutine fireCoroutine;
     private string currentWeapon = "Pistol";
-    private string bulletString;
+    private string bulletString = "8/16";
 
+    [Header("Bullet")]
+    public TextMeshProUGUI bulletMark;
     [Header("Força do Tiro")]
     public float fireForce = 20f;
     [Header("Cadência de Tiro (balas por segundo)")]
     public float fireRate = 10f;
-
+    [Header("Reloading Text")]
+    public GameObject reloadingText;
 
     private void Awake()
     {
@@ -34,13 +34,16 @@ public class Weapon : MonoBehaviour
         firepoint = GameObject.FindWithTag("FirePoint");
 
         _gameManager = FindObjectOfType<GameManager>();
+    }
 
-        bulletString = bulletMark.text;
+    private void Start()
+    {
+        reloadingText.SetActive(false);
     }
 
     private void Update()
     {   
-        if (canSpamShoots)
+        if (canSpamShoots) // Spam shoots logic
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -59,6 +62,25 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.R)) StartCoroutine(reloadWeapon(currentWeapon)); // Reload the weapon when player press 'R'
+    }
+
+    private IEnumerator showReloadingText()
+    {
+        if (reloadingText != null)
+        {
+            if (!reloadingText.activeSelf) reloadingText.SetActive(true);
+
+            yield return new WaitForSeconds(1.5f);
+
+            reloadingText.SetActive(false);
+        };
+    }
+
+    private void refreshBulletValues()
+    {
+        bulletString = bulletMark.text;
     }
 
     private IEnumerator FireContinuously()
@@ -70,30 +92,108 @@ public class Weapon : MonoBehaviour
         }
     }
     
-    private void decreaseBullet(string weapon) 
+    private void decreaseBullet() 
     {
         Debug.Log("Decreasing bullet of " + currentWeapon);
+        refreshBulletValues();
 
-        if (weapon == "M4")
-        {
-            Debug.Log(bulletString.Substring(0, 2));
-        } 
+        int slashPos = bulletString.IndexOf('/');
 
-        else if (weapon == "Pistol")
+        int comb = int.Parse(bulletString.Substring(0, slashPos)); // All numbers before slash (/)
+        int reserve = int.Parse(bulletString.Substring(slashPos + 1)); // All numbers before slash (/)
+
+        if ( slashPos == -1 )
         {
-            Debug.Log(bulletString[0]);
+            throw new System.Exception("Falta de '/' em bullet mark!");
         }
+
+        else if (comb < 1 && reserve < 1) bulletMark.text = "0/0"; // Acabou a bala do pente e da reserva
+
+        else comb--;
+
+        if (comb == 0) StartCoroutine(reloadWeapon(currentWeapon));
+
+        bulletMark.text = comb.ToString() + "/" + reserve.ToString();
+    }
+
+    private List<int> getWeaponInfo(string weapon)
+    {
+        List<int> infos = new List<int>();
+
+        if (stats.allStats.ContainsKey(weapon))
+        {
+            infos.Add(stats.bulletStats[weapon]["Comb"]);
+            infos.Add(stats.bulletStats[weapon]["Reserve"]);
+        };
+
+        return infos;
+    }
+
+    private IEnumerator reloadWeapon(string weaponName)
+    {   
+        Debug.Log("Reloading " + weaponName);
+
+        int slashPos = bulletString.IndexOf('/');
+
+        if ( slashPos == -1 )
+        {
+            throw new System.Exception("Falta de '/' em bullet mark!");
+        };
+
+        int comb = int.Parse(bulletString.Substring(0, slashPos));
+        int reserve = int.Parse(bulletString.Substring(slashPos + 1));
+
+        int weaponComb = getWeaponInfo(weaponName)[0];
+    
+        if (comb < weaponComb && reserve >= 1) 
+        {   
+            StartCoroutine(showReloadingText());
+            yield return new WaitForSeconds(1.5f);
+
+            int missingBullets = weaponComb - comb;
+            while (missingBullets >= 1)
+            {   
+                if (reserve == 0 ) break;
+
+                reserve--;
+                comb++;
+                missingBullets--;
+
+                bulletMark.text = comb + "/" + reserve;
+            };
+        };
+
+        refreshBulletValues();
+    } 
+
+    private bool canShoot()
+    {   
+        int slashPos = bulletString.IndexOf('/');
+
+        if ( slashPos == -1 )
+        {
+            throw new System.Exception("Falta de '/' em bullet mark!");
+        };
+
+        int comb = int.Parse(bulletString.Substring(0, slashPos));
+
+        if (comb > 0) return true;
+
+        return false;
     }
 
     public void Fire()
     {
-        Debug.Log("Fogo!!");
+        Debug.Log("Trying to shoot");
 
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.      Impulse);
+        if (canShoot())
+        {
+            GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
 
-        decreaseBullet(currentWeapon); // Diminui as balas
-        bulletString = bulletMark.text;
+            decreaseBullet(); // Diminui as balas
+            refreshBulletValues();
+        }
     }
 
     public void SwitchWeapon(string Weapon)
@@ -126,7 +226,7 @@ public class Weapon : MonoBehaviour
             Debug.LogError("Weapon not found: " + Weapon);
         }
 
-        bulletString = bulletMark.text;
+        refreshBulletValues();
     }
 
     public int CurrentWeaponForce()

@@ -45,11 +45,10 @@ public class EnemySpawner : MonoBehaviour
     {   
         enemiesDead++;
 
-        if(enemiesDead == enemysSpawned)
+        if(enemiesDead == enemysSpawned) // Round turn
         {
             Round++;
             roundToDrop++;
-            droper.DropSmth();
 
             if(roundToDrop % 2 == 0)
             {
