@@ -7,6 +7,7 @@ public class RoundTXTAnim : MonoBehaviour
 {   
     private Animator anim;
     private EnemySpawner enemySp;
+    
 
     [Header("Texto Round")]
     public TextMeshProUGUI RoundTXT;
@@ -54,5 +55,9 @@ public class RoundTXTAnim : MonoBehaviour
         yield return new WaitForSeconds(2.2f);
 
         enemySp.InstanciarInimigos(enemySp.Round);
+    }
+
+    public int getRoundNumber() {
+        return (int)enemySp.Round;
     }
 }

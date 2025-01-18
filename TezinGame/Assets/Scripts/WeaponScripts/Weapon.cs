@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using TMPro;
 
 public class Weapon : MonoBehaviour
 {
@@ -9,12 +10,16 @@ public class Weapon : MonoBehaviour
     public GameObject bulletPrefab;
     public bool canSpamShoots = false;
 
+    [Header("Bullet")]
+    public TextMeshProUGUI bulletMark;
+
     private GameManager _gameManager;
     private WeaponsStats stats;
     private SpriteRenderer spriteRender;
     private GameObject firepoint;
     private Coroutine fireCoroutine;
     private string currentWeapon = "Pistol";
+    private string bulletString;
 
     [Header("Força do Tiro")]
     public float fireForce = 20f;
@@ -29,6 +34,8 @@ public class Weapon : MonoBehaviour
         firepoint = GameObject.FindWithTag("FirePoint");
 
         _gameManager = FindObjectOfType<GameManager>();
+
+        bulletString = bulletMark.text;
     }
 
     private void Update()
@@ -52,7 +59,6 @@ public class Weapon : MonoBehaviour
                 }
             }
         }
-
     }
 
     private IEnumerator FireContinuously()
@@ -63,12 +69,31 @@ public class Weapon : MonoBehaviour
             yield return new WaitForSeconds(1f / fireRate);
         }
     }
+    
+    private void decreaseBullet(string weapon) 
+    {
+        Debug.Log("Decreasing bullet of " + currentWeapon);
+
+        if (weapon == "M4")
+        {
+            Debug.Log(bulletString.Substring(0, 2));
+        } 
+
+        else if (weapon == "Pistol")
+        {
+            Debug.Log(bulletString[0]);
+        }
+    }
 
     public void Fire()
     {
         Debug.Log("Fogo!!");
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.Impulse);
+        bullet.GetComponent<Rigidbody2D>().AddForce(firePoint.up * fireForce, ForceMode2D.      Impulse);
+
+        decreaseBullet(currentWeapon); // Diminui as balas
+        bulletString = bulletMark.text;
     }
 
     public void SwitchWeapon(string Weapon)
@@ -101,6 +126,7 @@ public class Weapon : MonoBehaviour
             Debug.LogError("Weapon not found: " + Weapon);
         }
 
+        bulletString = bulletMark.text;
     }
 
     public int CurrentWeaponForce()

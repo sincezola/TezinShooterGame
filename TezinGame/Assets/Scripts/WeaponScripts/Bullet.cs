@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
   }
   private void Update()
   {
-    if(contador >= 2)
+    if(contador >= 1) // Destrói a bala depois de 1 segundo de ela ser atirada
     {
       Destroy(gameObject);
       contador = 0;

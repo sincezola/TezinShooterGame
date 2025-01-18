@@ -2,12 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
+using TMPro;
 using UnityEngine;
 
 public class PlayerControls : MonoBehaviour
 {   
+    [Header("Flashlight Options")]
     public Light lanterna;
     public GameObject lanternaObject;
+
+    [Header("Bullet Text")]
+    public TextMeshProUGUI bulletsTXT;
     
     // Private Variables
     private bool Cooldown;
@@ -129,15 +134,25 @@ public class PlayerControls : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) // Objetos Dropados
     {
+        // Pegou arma no chão
+        
         if(Input.GetKeyDown(KeyCode.F)) // Interagindo com o Item dropado
         {
             switch (other.gameObject.tag)
             {
                 case "DroppedM4": // Quer pegar uma M4 Dropada
 
-                    Debug.Log("PegouM4");
+                    Debug.Log("Pegou M4");
 
                     Weapon.SwitchWeapon("M4");
+                    bulletsTXT.text = "30/120";
+                    break;
+
+                case "Pistol":
+                    
+                    Debug.Log("Pegou Pistola");
+                    bulletsTXT.text = "8/16";
+
                     break;
 
                 default:

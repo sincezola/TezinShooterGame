@@ -31,13 +31,10 @@ public class GameManager : MonoBehaviour
         {
             return true;
         }
+
+        Application.Quit();
         
-        else
-        {
-            Application.Quit();
-            
-            return false;
-        }
+        return false;
     }
 
     public void DecreasePlayerHP(int Damage)
