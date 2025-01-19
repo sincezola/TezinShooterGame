@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
 
             if(roundToDrop % 2 == 0)
             {
-                droper.DropSmth();
+                StartCoroutine(droper.DropSmth());;
                 roundToDrop = 0;
             }
 

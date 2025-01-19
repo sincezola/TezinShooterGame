@@ -9,6 +9,9 @@ TagManager:
   - Obstacle
   - DroppedM4
   - FirePoint
+  - Totem
+  - DroppedPistol
+  - DroppedTotem
   layers:
   - Default
   - TransparentFX
@@ -16,8 +19,8 @@ TagManager:
   - Dropped
   - Water
   - UI
-  - 
-  - 
+  - IgnoreCollisionLayer
+  - PlayerLayer
   - 
   - 
   - 

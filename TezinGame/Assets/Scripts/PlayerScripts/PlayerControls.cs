@@ -22,6 +22,7 @@ public class PlayerControls : MonoBehaviour
     private Rigidbody2D rb;
     private Weapon Weapon;
     private GameManager gameManager;
+    private Totem totem;
 
     Vector2 moveDirection;
 
@@ -31,6 +32,7 @@ public class PlayerControls : MonoBehaviour
         droper = FindObjectOfType<Droper>();
         rb = GetComponent<Rigidbody2D>();
         gameManager = FindObjectOfType<GameManager>();
+        totem = FindObjectOfType<Totem>();
     }
 
     private void Update()
@@ -132,32 +134,44 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) // Objetos Dropados
+    private void OnTriggerStay2D(Collider2D other) // Dropped Objects
     {
-        // Pegou arma no chão
+        // Took a dropped weapon
         
-        if(Input.GetKeyDown(KeyCode.F)) // Interagindo com o Item dropado
+        if(Input.GetKeyDown(KeyCode.F)) // Interacting to a dropped item
         {
             switch (other.gameObject.tag)
             {
-                case "DroppedM4": // Quer pegar uma M4 Dropada
+                case "DroppedM4":
 
-                    Debug.Log("Pegou M4");
+                    Debug.Log("Took M4");
+
+                    List<int> m4Info = Weapon.getWeaponInfo("M4");
 
                     Weapon.SwitchWeapon("M4");
-                    bulletsTXT.text = "30/120";
+                    bulletsTXT.text = m4Info[0] + "/" + m4Info[1];
                     break;
 
-                case "Pistol":
+                case "DroppedPistol":
                     
-                    Debug.Log("Pegou Pistola");
-                    bulletsTXT.text = "8/16";
+                    Debug.Log("Took Pistol");
+
+                    List<int> pistolInfo = Weapon.getWeaponInfo("Pistol");
+
+                    Weapon.SwitchWeapon("Pistol");
+                    bulletsTXT.text = pistolInfo[0] + "/" + pistolInfo[1];
+
+                    break;
+
+                case "DroppedTotem": 
+
+                    totem.isTotemAvailable = true;
 
                     break;
 
                 default:
                     break;
-            }
+            };
 
             Destroy(other.gameObject);
         }

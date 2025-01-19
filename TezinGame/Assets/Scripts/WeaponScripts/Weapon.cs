@@ -16,7 +16,8 @@ public class Weapon : MonoBehaviour
     private GameObject firepoint;
     private Coroutine fireCoroutine;
     private string currentWeapon = "Pistol";
-    private string bulletString = "8/16";
+    private string bulletString;
+    private bool isReloading = false;
 
     [Header("Bullet")]
     public TextMeshProUGUI bulletMark;
@@ -39,6 +40,11 @@ public class Weapon : MonoBehaviour
     private void Start()
     {
         reloadingText.SetActive(false);
+        
+        var weaponInfo = getWeaponInfo(currentWeapon);
+        bulletMark.text = weaponInfo[0] + "/" + weaponInfo[1];
+
+        refreshBulletValues();
     }
 
     private void Update()
@@ -66,13 +72,13 @@ public class Weapon : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)) StartCoroutine(reloadWeapon(currentWeapon)); // Reload the weapon when player press 'R'
     }
 
-    private IEnumerator showReloadingText()
+    private IEnumerator showReloadingText(float time)
     {
         if (reloadingText != null)
         {
             if (!reloadingText.activeSelf) reloadingText.SetActive(true);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(time);
 
             reloadingText.SetActive(false);
         };
@@ -121,7 +127,7 @@ public class Weapon : MonoBehaviour
         bulletMark.text = comb.ToString() + "/" + reserve.ToString();
     }
 
-    private List<int> getWeaponInfo(string weapon)
+    public List<int> getWeaponInfo(string weapon)
     {
         List<int> infos = new List<int>();
 
@@ -129,15 +135,35 @@ public class Weapon : MonoBehaviour
         {
             infos.Add(stats.bulletStats[weapon]["Comb"]);
             infos.Add(stats.bulletStats[weapon]["Reserve"]);
+        }
+
+        else
+        {
+            Debug.LogError("Gun " + weapon + " cannot be find");
         };
 
         return infos;
     }
 
+    public float getBulletsInfo(string weapon, bool wannaShootSpeed = false)
+    {
+        if (stats.allStats.ContainsKey(weapon))
+        {
+            if (!wannaShootSpeed) return stats.reloadTime[weapon];
+
+            return 0; // shoot speed logic
+        }
+
+        else
+        {
+            Debug.LogError("Gun " + weapon + " cannot be find");
+
+            return 0;
+        };
+    }
+
     private IEnumerator reloadWeapon(string weaponName)
     {   
-        Debug.Log("Reloading " + weaponName);
-
         int slashPos = bulletString.IndexOf('/');
 
         if ( slashPos == -1 )
@@ -149,11 +175,14 @@ public class Weapon : MonoBehaviour
         int reserve = int.Parse(bulletString.Substring(slashPos + 1));
 
         int weaponComb = getWeaponInfo(weaponName)[0];
-    
-        if (comb < weaponComb && reserve >= 1) 
+
+        if (comb != weaponComb && comb < weaponComb && reserve >= 1)
         {   
-            StartCoroutine(showReloadingText());
-            yield return new WaitForSeconds(1.5f);
+            Debug.Log("Reloading " + weaponName);
+            isReloading = true;
+
+            StartCoroutine(showReloadingText(getBulletsInfo(weaponName)));
+            yield return new WaitForSeconds(getBulletsInfo(weaponName));
 
             int missingBullets = weaponComb - comb;
             while (missingBullets >= 1)
@@ -169,8 +198,9 @@ public class Weapon : MonoBehaviour
             };
         };
 
+        isReloading = false;
         refreshBulletValues();
-    } 
+    }    
 
     private bool canShoot()
     {   
@@ -183,7 +213,7 @@ public class Weapon : MonoBehaviour
 
         int comb = int.Parse(bulletString.Substring(0, slashPos));
 
-        if (comb > 0) return true;
+        if (comb > 0 && !isReloading) return true;
 
         return false;
     }
@@ -217,12 +247,18 @@ public class Weapon : MonoBehaviour
             {
                 spriteRender.sprite = _gameManager.M4Weapon;
 
+                List<int> m4Info = getWeaponInfo("M4");
+                bulletMark.text = m4Info[0] + "/" + m4Info[1];
+
                 canSpamShoots = true;
                 currentWeapon = "M4";
             }
             else if (Weapon == "Pistol")
             {
                 spriteRender.sprite = _gameManager.PistolWeapon;
+                
+                List<int> pistolInfo = getWeaponInfo("Pistol");
+                bulletMark.text = pistolInfo[0] + "/" + pistolInfo[1];
 
                 canSpamShoots = false;
                 currentWeapon = "Pistol";
@@ -240,7 +276,9 @@ public class Weapon : MonoBehaviour
         if (currentWeapon == "M4")
         {
             return 2;
-        } else if (currentWeapon == "Pistol"){
+        } 
+
+        else if (currentWeapon == "Pistol"){
             return 1;
         }
 
@@ -248,6 +286,6 @@ public class Weapon : MonoBehaviour
         {   
             Debug.Log("Arma desconhecida, alterando dano para 1");
             return 1;
-        }
+        };
     }   
 }
