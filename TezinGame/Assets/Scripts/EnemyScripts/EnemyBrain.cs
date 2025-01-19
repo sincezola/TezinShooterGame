@@ -7,6 +7,8 @@ public class EnemyBrain : MonoBehaviour
     private GameManager gameManager;
     private EnemySpawner spawner;
     private int enemyHp = 5;
+    private bool isCollidingWithPlayer = false;
+    private bool isCollidingWithTotem = false;
 
     [Header("Health Bar Settings")]
     public Transform healthBar; // Barra verde
@@ -21,17 +23,25 @@ public class EnemyBrain : MonoBehaviour
 
     private void Start()
     {
-      healthBarScale = healthBar.localScale; // Guarda o tamanho original da bar
+      healthBarScale = healthBar.localScale;
       healtPercent = healthBarScale.x / enemyHp;
     }
 
     private void Update()
     {
-      if (gameManager.isPlayerAlive())
+      if (gameManager.isPlayerAlive() && !isCollidingWithPlayer && !isCollidingWithTotem)
       {
-          // Move o inimigo em direção ao jogador.
-          transform.position = Vector2.MoveTowards(transform.position, gameManager.playerTransform.position, gameManager.enemySpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, gameManager.playerTransform.position, gameManager.enemySpeed * Time.deltaTime);
       }
+    }
+
+  private void OnTriggerEnter2D(Collider2D other)
+  { 
+    if(other.gameObject.tag == "Bullet")
+    {
+      enemyHp--;
+      healthBarScale.x = healtPercent * enemyHp;
+      healthBar.localScale = healthBarScale;
 
       if (enemyHp <= 0)
       {
@@ -40,15 +50,31 @@ public class EnemyBrain : MonoBehaviour
         spawner.EnemyDied();
       }
     }
+  }
 
-    private void OnTriggerEnter2D(Collider2D other)
-    { 
-      if(other.gameObject.tag == "Bullet")
+  void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+          isCollidingWithPlayer = true;
+        }
+
+        else if (collision.gameObject.CompareTag("Totem"))
+        {
+          isCollidingWithTotem = true;
+        }
+    }
+
+  void OnCollisionExit2D(Collision2D collision)
+  {
+      if (collision.gameObject.CompareTag("Player"))
       {
-        enemyHp -= 1;
-        healthBarScale.x = healtPercent * enemyHp;
-        healthBar.localScale = healthBarScale;
+        isCollidingWithPlayer = false;
       }
 
-    }
+      else if (collision.gameObject.CompareTag("Totem"))
+      {
+        isCollidingWithTotem = false;
+      }
+  }
 }

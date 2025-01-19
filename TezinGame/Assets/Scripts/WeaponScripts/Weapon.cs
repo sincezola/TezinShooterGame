@@ -111,7 +111,12 @@ public class Weapon : MonoBehaviour
 
         else comb--;
 
-        if (comb == 0) StartCoroutine(reloadWeapon(currentWeapon));
+        if (comb == 0) 
+        {
+            bulletMark.text = "0/" + reserve;
+            refreshBulletValues();
+            StartCoroutine(reloadWeapon(currentWeapon));
+        };
 
         bulletMark.text = comb.ToString() + "/" + reserve.ToString();
     }
@@ -156,6 +161,7 @@ public class Weapon : MonoBehaviour
                 if (reserve == 0 ) break;
 
                 reserve--;
+
                 comb++;
                 missingBullets--;
 
