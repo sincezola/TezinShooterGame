@@ -6,7 +6,8 @@ public class Totem : MonoBehaviour
 {
 
     [Header("Totem Info")]
-    public bool isTotemAvailable = false;
+    public GameObject totemHud;
+    public GameObject totemHud2;
     public GameObject totemPrefab;
     public int health = 5;
 
@@ -25,17 +26,26 @@ public class Totem : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         healthBarScale = healthBar.localScale;
         healthPercent = healthBarScale.x / health;
+
+        UpdateTotemHud();
     }
 
     private void Update()
     {
         CatchCall();
+        TotemDamageSystem();
 
-        if (isCollidingWithEnemy) // For collisions
+        Debug.Log("Totems Hud: " + manager.totemsHud);
+        Debug.Log("Totems Count: " + manager.totemCount);
+    }
+
+    private void TotemDamageSystem()
+    {
+        if (isCollidingWithEnemy)
         {
             timer += Time.deltaTime;
 
-            if (timer >= 1.0f)
+            if (isCollidingWithEnemy && timer >= 1.0f)
             {
                 Debug.Log("Tomei dano!");
 
@@ -51,8 +61,8 @@ public class Totem : MonoBehaviour
 
     private void CatchCall()
     {
-        if (Input.GetKeyUp(KeyCode.G) && isTotemAvailable)
-        {
+        if (Input.GetKeyUp(KeyCode.G) && manager.totemsHud > 0 && manager.totemCount < manager.maxTotemsPlaced)
+        {   
             ActiveTotem();
         }
     }
@@ -63,6 +73,12 @@ public class Totem : MonoBehaviour
 
         Vector3 playerPos = manager.playerTransform.position;
         Instantiate(totemPrefab, playerPos, Quaternion.identity);
+
+        
+        manager.DecreaseTotemsHud();
+        manager.IncreaseTotemCount();
+
+        UpdateTotemHud();
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -98,6 +114,29 @@ public class Totem : MonoBehaviour
 
     private void CheckTotemLife()
     {
-        if (health <= 0) Destroy(totemPrefab);
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+            manager.DecreaseTotemCount();
+        }
+    }
+
+    public void UpdateTotemHud()   
+    {
+        if (manager.totemsHud == 2)
+        {
+            totemHud.SetActive(true);
+            totemHud2.SetActive(true);
+        }
+        else if (manager.totemsHud == 1)
+        {
+            totemHud.SetActive(true);
+            totemHud2.SetActive(false);
+        }
+        else
+        {
+            totemHud.SetActive(false);
+            totemHud2.SetActive(false);
+        }
     }
 }

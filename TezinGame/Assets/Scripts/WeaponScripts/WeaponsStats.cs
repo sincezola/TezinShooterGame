@@ -13,7 +13,10 @@ public class WeaponsStats : MonoBehaviour
     public Dictionary<string, float> reloadTime;
 
     // Bullets Speed Hash Map
-    // todo -----
+    public Dictionary<string,float> fireSpeed;
+    
+    // Fire Rate Hash Map
+    public Dictionary<string, float> fireRate;
 
     #region Weapons Dictionary's
     private Dictionary<string, Vector3> M4Stats = new Dictionary<string, Vector3>();
@@ -45,6 +48,14 @@ public class WeaponsStats : MonoBehaviour
         // Reload Time
         reloadTime.Add("Pistol", 1.5f);
         reloadTime.Add("M4", 2.2f);
+
+        // Fire Rate
+        fireRate.Add("Pistol", 0.1f);
+        fireRate.Add("M4", 0.2f);
+
+        // Fire Speed
+        fireSpeed.Add("Pistol", 20.0f);
+        fireSpeed.Add("M4", 50.0f);
     }
 
     private void Awake()
@@ -61,7 +72,10 @@ public class WeaponsStats : MonoBehaviour
             { "Pistol", PistolBullets }
         };
 
+        // Simple Hash Maps
         reloadTime = new Dictionary<string, float>();
+        fireRate = new Dictionary<string, float>();
+        fireSpeed = new Dictionary<string, float>();
 
         InitializeStats();
     }

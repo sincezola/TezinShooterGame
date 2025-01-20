@@ -13,9 +13,10 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Bullet Text")]
     public TextMeshProUGUI bulletsTXT;
+    [Header("Cooldwon")]
+    public bool Cooldown;
     
     // Private Variables
-    private bool Cooldown;
     private Droper droper;
     private float timer;
     private bool isFlashLightOn = true;
@@ -23,7 +24,8 @@ public class PlayerControls : MonoBehaviour
     private Weapon Weapon;
     private GameManager gameManager;
     private Totem totem;
-
+    private bool tookObject;
+    private Collider2D currentDroppedItem;
     Vector2 moveDirection;
 
     private void Awake()
@@ -47,6 +49,60 @@ public class PlayerControls : MonoBehaviour
         }
 
         lanterna.transform.position = new Vector3(gameManager.playerTransform.position.x, gameManager.playerTransform.position.y, -1.39f);
+
+        if (currentDroppedItem != null && Input.GetKeyDown(KeyCode.F))
+        {
+            tookObject = false;
+            switch (currentDroppedItem.gameObject.tag)
+            {
+                case "DroppedM4":
+                    if (!Weapon.isReloading)
+                    {   
+                        Debug.Log("Took M4");
+
+                        List<float> m4Info = Weapon.getWeaponInfo("M4");
+
+                        Weapon.SwitchWeapon("M4");
+                        bulletsTXT.text = m4Info[0] + "/" + m4Info[1];
+
+                        tookObject = true;
+                    }
+                    break;
+
+                case "DroppedPistol":
+                    if (!Weapon.isReloading)
+                    {
+                        Debug.Log("Took Pistol");
+
+                        List<float> pistolInfo = Weapon.getWeaponInfo("Pistol");
+
+                        Weapon.SwitchWeapon("Pistol");
+                        bulletsTXT.text = pistolInfo[0] + "/" + pistolInfo[1];
+
+                        tookObject = true;
+                    }
+                    break;
+
+                case "DroppedTotem": 
+                    if (gameManager.totemsHud < gameManager.maxTotemsPlaced)
+                    {   
+                        Debug.Log("Took Totem");
+                        gameManager.IncreaseTotemsHud();
+                        totem.UpdateTotemHud();
+                        tookObject = true;
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+
+            if (tookObject)
+            {
+                Destroy(currentDroppedItem.gameObject);
+                currentDroppedItem = null;
+            }
+        }
     }
     
     private void FixedUpdate()
@@ -59,15 +115,17 @@ public class PlayerControls : MonoBehaviour
         if(Input.GetMouseButtonDown(0) && !Cooldown)
         {
             Weapon.Fire();
-            StartCoroutine(fireCooldown(0.1f));
+            StartCoroutine(fireCooldown(Weapon.currentWeapon));
         }
     }
 
-    private IEnumerator fireCooldown(float HowMuchCooldown)
+    private IEnumerator fireCooldown(string weaponName)
     {
         Cooldown = true;
+ 
+        float cooldown = Weapon.getWeaponInfo(Weapon.currentWeapon, false, true)[0];
 
-        yield return new WaitForSeconds(HowMuchCooldown);
+        yield return new WaitForSeconds(cooldown);
 
         Cooldown = false;
     }
@@ -94,7 +152,6 @@ public class PlayerControls : MonoBehaviour
         {
             isFlashLightOn = true;
         }
-
         else
         {
             isFlashLightOn = false;
@@ -103,77 +160,19 @@ public class PlayerControls : MonoBehaviour
         lanternaObject.SetActive(isFlashLightOn);
     }
 
-    private void OnCollisionStay2D(Collision2D other)
-    {   
-        if (other.gameObject.CompareTag("Enemy"))
-        {    
-            timer += Time.deltaTime;
-
-            if (timer >= 1.0f)
-            {
-                gameManager.DecreasePlayerHP(1);
-                timer = 0;
-            }
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.CompareTag("DroppedM4") || other.CompareTag("DroppedPistol") || other.CompareTag("DroppedTotem"))
         {
-            timer = 0;
+            currentDroppedItem = other;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Enemy")
-        {   
-            Debug.Log("Colidi");
-            gameManager.DecreasePlayerHP(Weapon.CurrentWeaponForce());
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other) // Dropped Objects
-    {
-        // Took a dropped weapon
-        
-        if(Input.GetKeyDown(KeyCode.F)) // Interacting to a dropped item
+        if (other == currentDroppedItem)
         {
-            switch (other.gameObject.tag)
-            {
-                case "DroppedM4":
-
-                    Debug.Log("Took M4");
-
-                    List<int> m4Info = Weapon.getWeaponInfo("M4");
-
-                    Weapon.SwitchWeapon("M4");
-                    bulletsTXT.text = m4Info[0] + "/" + m4Info[1];
-                    break;
-
-                case "DroppedPistol":
-                    
-                    Debug.Log("Took Pistol");
-
-                    List<int> pistolInfo = Weapon.getWeaponInfo("Pistol");
-
-                    Weapon.SwitchWeapon("Pistol");
-                    bulletsTXT.text = pistolInfo[0] + "/" + pistolInfo[1];
-
-                    break;
-
-                case "DroppedTotem": 
-
-                    totem.isTotemAvailable = true;
-
-                    break;
-
-                default:
-                    break;
-            };
-
-            Destroy(other.gameObject);
+            currentDroppedItem = null;
         }
     }
 }

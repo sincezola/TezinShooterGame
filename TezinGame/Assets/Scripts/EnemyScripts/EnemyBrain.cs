@@ -65,15 +65,17 @@ public class EnemyBrain : MonoBehaviour
         }
     }
 
-  void OnCollisionExit2D(Collision2D collision)
+  private IEnumerator OnCollisionExit2D(Collision2D collision)
   {
       if (collision.gameObject.CompareTag("Player"))
-      {
+      { 
+        yield return new WaitForSeconds(0.6f);
         isCollidingWithPlayer = false;
       }
 
       else if (collision.gameObject.CompareTag("Totem"))
       {
+        yield return new WaitForSeconds(0.6f);
         isCollidingWithTotem = false;
       }
   }

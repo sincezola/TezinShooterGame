@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {   
+  [Header("Bullet")]
+  public float bulletDestroyTime = 1.0f;
+
+  // Private
   private int contador;
   private EnemyBrain enemyScript;
 
   private void Awake()
   {
-      enemyScript = FindObjectOfType<EnemyBrain>();
+    enemyScript = FindObjectOfType<EnemyBrain>();
   }
 
   private void Start()
@@ -18,7 +22,7 @@ public class Bullet : MonoBehaviour
   }
   private void Update()
   {
-    if (contador >= 1) // Destrói a bala depois de 1 segundo de ela ser atirada
+    if (contador >= bulletDestroyTime) // Destroy the bullet after bulletDestroyTime
     {
       Destroy(gameObject);
       contador = 0;
