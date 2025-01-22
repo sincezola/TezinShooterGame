@@ -9,15 +9,16 @@ public class Totem : MonoBehaviour
     public GameObject totemHud;
     public GameObject totemHud2;
     public GameObject totemPrefab;
-    public int health = 5;
+    public int health = 4;
+    public List<Sprite> spriteList;
 
     [Header("Health Bar Settings")]
     public Transform healthBar; // Barra verde
-
     private Vector3 healthBarScale; // Tamanho da barra
     private float healthPercent; // Percentual de vida para calculo
+    
     private bool isCollidingWithEnemy = false;
-
+    private SpriteRenderer spriteRenderer;
     private GameManager manager;
     private float timer;
 
@@ -26,6 +27,8 @@ public class Totem : MonoBehaviour
         manager = FindObjectOfType<GameManager>();
         healthBarScale = healthBar.localScale;
         healthPercent = healthBarScale.x / health;
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = spriteList[0];
 
         UpdateTotemHud();
     }
@@ -34,9 +37,6 @@ public class Totem : MonoBehaviour
     {
         CatchCall();
         TotemDamageSystem();
-
-        Debug.Log("Totems Hud: " + manager.totemsHud);
-        Debug.Log("Totems Count: " + manager.totemCount);
     }
 
     private void TotemDamageSystem()
@@ -47,16 +47,17 @@ public class Totem : MonoBehaviour
 
             if (isCollidingWithEnemy && timer >= 1.0f)
             {
-                Debug.Log("Tomei dano!");
-
                 health--;
+
+                if (health != 0) spriteRenderer.sprite = spriteList[health];
+
                 healthBarScale.x = healthPercent * health;
                 healthBar.localScale = healthBarScale;
 
                 CheckTotemLife();
                 timer = 0;
             }
-        }
+        };
     }
 
     private void CatchCall()
@@ -64,7 +65,7 @@ public class Totem : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.G) && manager.totemsHud > 0 && manager.totemCount < manager.maxTotemsPlaced)
         {   
             ActiveTotem();
-        }
+        };
     }
 
     private void ActiveTotem()
@@ -85,14 +86,15 @@ public class Totem : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("Tomei dano!");
-
             health--;
+
+            if (health == 3) spriteRenderer.sprite = spriteList[3];
+
             healthBarScale.x = healthPercent * health;
             healthBar.localScale = healthBarScale;
 
             CheckTotemLife();
-        }
+        };
     }
 
     private void OnCollisionStay2D(Collision2D other)
@@ -100,7 +102,7 @@ public class Totem : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             isCollidingWithEnemy = true;
-        }
+        };
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -108,8 +110,8 @@ public class Totem : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             isCollidingWithEnemy = false;
-            timer = 0; // Reseta o timer se sair da colisão
-        }
+            timer = 0;
+        };
     }
 
     private void CheckTotemLife()
@@ -118,7 +120,7 @@ public class Totem : MonoBehaviour
         {
             Destroy(gameObject);
             manager.DecreaseTotemCount();
-        }
+        };
     }
 
     public void UpdateTotemHud()   
@@ -137,6 +139,6 @@ public class Totem : MonoBehaviour
         {
             totemHud.SetActive(false);
             totemHud2.SetActive(false);
-        }
+        };
     }
 }

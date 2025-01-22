@@ -17,7 +17,8 @@ public class GameManager : MonoBehaviour
     [Header("Características dos Jogadores")]
     public float enemySpeed = 4f;
     public float playerSpeed = 5f;
-    public int playerHp = 7;
+    public float playerHp = 7.0f;
+    public float playerHpLimit = 7.0f;
 
     [Header("Screen Size")]
     public static int width = 72;
@@ -29,11 +30,32 @@ public class GameManager : MonoBehaviour
     public int maxTotemsPlaced = 2;
 
     [Header("Health Bar Settings")]
-    public List <GameObject> HealthBarPieces = new List<GameObject>();
+    public Transform healthBar; // Barra verde
+    private Vector3 healthBarScale; // Tamanho da barra
+    private float healtPercent; // Percentual de vida para calculo
+
+    private EnemyBrain brain;
+
+    private void Awake()
+    {
+        brain = FindObjectOfType<EnemyBrain>();
+    }
 
     private void Start()
     {
         totemsHud = 0;
+        healthBarScale = healthBar.localScale;
+        healtPercent = healthBarScale.x / playerHp;
+    }
+
+    private void Update()
+    {
+        CheckTotems();
+    }
+
+    private void CheckTotems()
+    {
+        if (brain.totem1 == null && brain.totem2 == null) brain.ChangeEnemyObjective(playerTransform);
     }
 
     public bool isPlayerAlive()
@@ -48,22 +70,30 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
-    public void DecreasePlayerHP(int Damage)
+    public void DecreasePlayerHP(float Damage)
     {   
         playerHp -= Damage;
+        AdjustPlayerHealth();
         
         if (playerHp <= 0)
         {
             Destroy(playerGameObject);
-            Destroy(HealthBarPieces[0]);
 
             enabled = false;
         }
+    }
 
-        else
-        {
-            HealthBarPieces[playerHp].SetActive(false);
-        }
+    public void IncreasePlayerHp(float quantity)
+    {
+        Debug.Log("Cheguei na função de ganhar vida");
+        Debug.Log($"Vida antiga: {playerHp}");
+
+        // Soma a vida que será ganha, respeitando o limite máximo
+        playerHp = Mathf.Min(playerHp + quantity, playerHpLimit);
+
+        Debug.Log($"Vida nova: {playerHp}");
+
+        AdjustPlayerHealth();
     }
 
     public void IncreaseTotemsHud()
@@ -86,5 +116,11 @@ public class GameManager : MonoBehaviour
     public void DecreaseTotemCount()
     {
         totemCount--;
+    }
+
+    public void AdjustPlayerHealth()
+    {
+        healthBarScale.x = healtPercent * playerHp;
+        healthBar.localScale = healthBarScale;
     }
 }

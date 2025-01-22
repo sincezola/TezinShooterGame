@@ -8,7 +8,7 @@ public class Droper : MonoBehaviour
 {   
     private EnemySpawner spawner;
     private GameManager gameManager;
-    public GameObject gunToDrop;
+    private GameObject gunToDrop;
 
     [Header("Lista dos Pontos de Drop")]
     public List<Transform> DropPoints = new List<Transform>();
@@ -19,7 +19,6 @@ public class Droper : MonoBehaviour
     [Header("Texto para Dropar Item")]
     public GameObject dropingTXT;
 
-    [SerializeField]
     private int RandomDropPointInteger;
 
     private void Awake()

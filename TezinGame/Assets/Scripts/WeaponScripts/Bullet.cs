@@ -32,10 +32,7 @@ public class Bullet : MonoBehaviour
   {   
     Debug.Log("Atingi " + other.name);
 
-    if(other.gameObject.tag == "Enemy")
-    {
-      Destroy(gameObject);
-    }
+    if(other.gameObject.tag == "Enemy") Destroy(gameObject);
   }
 
   private void Contador()

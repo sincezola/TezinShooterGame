@@ -242,8 +242,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -494670781
-  m_SortingLayer: 1
+  m_SortingLayerID: 294118185
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 79ae323261b2c3d44b674760d9414164, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -340,8 +340,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf2ba0e775cf8b4e8f49b9c4a4111e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   healthBar: {fileID: 2545028327759810519}
-  detectionRadius: 1000
 --- !u!1 &5877923587060057044
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,8 @@ public class PlayerControls : MonoBehaviour
 
     [Header("Bullet Text")]
     public TextMeshProUGUI bulletsTXT;
-    [Header("Cooldwon")]
+
+    [Header("Cooldown")]
     public bool Cooldown;
     
     // Private Variables
