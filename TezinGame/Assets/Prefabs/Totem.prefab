@@ -163,8 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8560c18ae32388845a1a9cb44f8f7c8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totemHud: {fileID: 8924367496986151373, guid: 27022b2438cf51e41b6f388af438fe3f, type: 3}
-  totemHud2: {fileID: 3668439883131325557, guid: 7632dbf695fb48f4faee64c54b31d36b, type: 3}
+  totemHud: {fileID: 6236107065867164079, guid: 27022b2438cf51e41b6f388af438fe3f, type: 3}
+  totemHud2: {fileID: 8008893849765829861, guid: 7632dbf695fb48f4faee64c54b31d36b, type: 3}
   totemPrefab: {fileID: 108232062475657239}
   health: 4
   spriteList:

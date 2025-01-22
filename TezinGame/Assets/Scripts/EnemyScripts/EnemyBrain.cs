@@ -11,7 +11,6 @@ public class EnemyBrain : MonoBehaviour
     private bool isCollidingWithTotem = false;
     private Coroutine damageCoroutine;
 
-
     [Header("Totems")]
     public Transform totem1;
     public Transform totem2;
@@ -96,7 +95,7 @@ public class EnemyBrain : MonoBehaviour
     private IEnumerator DamagePlayerOverTime()
     {   
         while (isCollidingWithPlayer)
-        {
+        {   
             gameManager.DecreasePlayerHP(damage);
             yield return new WaitForSeconds(1f);
         }

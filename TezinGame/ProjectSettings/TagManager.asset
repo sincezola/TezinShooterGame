@@ -12,6 +12,7 @@ TagManager:
   - Totem
   - DroppedPistol
   - DroppedTotem
+  - Range
   layers:
   - Default
   - TransparentFX
@@ -21,9 +22,9 @@ TagManager:
   - UI
   - IgnoreCollisionLayer
   - PlayerLayer
-  - 
-  - 
-  - 
+  - EnemyBody
+  - EnemyTrigger
+  - Bullet
   - 
   - 
   - 

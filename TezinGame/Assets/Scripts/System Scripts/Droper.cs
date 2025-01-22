@@ -9,6 +9,7 @@ public class Droper : MonoBehaviour
     private EnemySpawner spawner;
     private GameManager gameManager;
     private GameObject gunToDrop;
+    private DropperTxtAnim dropperAnim;
 
     [Header("Lista dos Pontos de Drop")]
     public List<Transform> DropPoints = new List<Transform>();
@@ -20,6 +21,7 @@ public class Droper : MonoBehaviour
     public GameObject dropingTXT;
 
     private int RandomDropPointInteger;
+    private bool isDropping = false;
 
     private void Awake()
     {
@@ -29,20 +31,20 @@ public class Droper : MonoBehaviour
 
     private void Start()
     {
-        dropingTXT.SetActive(false);
+        dropperAnim = FindObjectOfType<DropperTxtAnim>();
     }
 
     public IEnumerator DropSmth()
-    {   
-        if(!gameManager.isPlayerAlive())
-        {   
-            enabled = false;
+    {
+        if (isDropping || !gameManager.isPlayerAlive())
+        {
+            yield break;
         }
 
-        dropingTXT.SetActive(true);
+        isDropping = true;
+        dropperAnim.AnimateDropperTxT(1);
 
         int randomIndex = Random.Range(0, ItemsArray.Count);
-
         gunToDrop = ItemsArray[randomIndex];
 
         yield return new WaitForSeconds(2.0f);
@@ -56,8 +58,11 @@ public class Droper : MonoBehaviour
 
         Debug.Log("Object dropped in " + DropPoints[RandomDropPointInteger].position + " Position Sucefully!");
 
-        dropingTXT.SetActive(false);
+        dropperAnim.AnimateDropperTxT(0);
+
+        isDropping = false;
     }
+
 
     public UnityEngine.Vector3 WeaponPos()
     {

@@ -25,9 +25,11 @@ public class Totem : MonoBehaviour
     private void Start()
     {
         manager = FindObjectOfType<GameManager>();
+        
         healthBarScale = healthBar.localScale;
         healthPercent = healthBarScale.x / health;
         spriteRenderer = GetComponent<SpriteRenderer>();
+
         spriteRenderer.sprite = spriteList[0];
 
         UpdateTotemHud();
