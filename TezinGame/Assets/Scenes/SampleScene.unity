@@ -62863,63 +62863,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &784704683
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 35.713573
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 16.576794
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9925203
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.12207967
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 14.024
-      objectReference: {fileID: 0}
-    - target: {fileID: 4331305469687795709, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
-      propertyPath: m_Name
-      value: MetralhadoraDropada
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
 --- !u!1 &785601829
 GameObject:
   m_ObjectHideFlags: 0
@@ -90024,6 +89967,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &1202634007
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 35.902134
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 15.537958
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9925203
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.12207967
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4059178269839498899, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 14.024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331305469687795709, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
+      propertyPath: m_Name
+      value: MetralhadoraDropada
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 475b290208bdfe646a3f69e97ebccbfe, type: 3}
 --- !u!1 &1204275815
 GameObject:
   m_ObjectHideFlags: 0
@@ -143607,5 +143607,5 @@ SceneRoots:
   - {fileID: 773654087}
   - {fileID: 1940101622}
   - {fileID: 184292140}
-  - {fileID: 784704683}
   - {fileID: 6074882573059556916}
+  - {fileID: 1202634007}
